@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  openresty-web:
+     image: neilink/openresty_naxsi
+     container_name: openresty
+     ports:
+        - "8080:80"
+        - "8022:22"
+        - "8443:443"
+     volumes:
+        - /etc/localtime:/etc/localtime:ro
+        - /docker-vol/conf.d:/usr/local/openresty/conf.d
+        - /docker-vol/vhost:/vhost  
+     networks:
+        - nginx-web-net
+
+  php7.2-fpm:
+     image: neilink/php-fpm7.2
+     container_name: fpm1
+     ports:
+       - "9090:9000"
+     volumes:
+       - /etc/localtime:/etc/localtime:ro      
+       - /docker-vol/vhost:/vhost
+     networks:
+       - nginx-web-net
+
+networks:
+  nginx-web-net:     

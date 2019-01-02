@@ -1,0 +1,11 @@
+#include /usr/share/naxsi_white.rules;
+SecRulesEnabled;
+
+DeniedUrl "/RequestDenied";
+
+CheckRule "$SQL >= 8" BLOCK;
+CheckRule "$RFI >= 8" BLOCK;
+CheckRule "$TRAVERSAL >= 4" BLOCK;
+CheckRule "$EVADE >= 4" BLOCK;
+CheckRule "$XSS >= 8" BLOCK;
+error_log /var/log/naxsi.log;
